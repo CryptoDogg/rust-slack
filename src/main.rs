@@ -3,17 +3,17 @@ use dotenv;
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error> {
     let slack_webhook = dotenv::var("SLACK_WEBHOOK_URL").expect("SLACK_WEBHOOK_URL must be set");
-    let echo_json: serde_json::Value = reqwest::Client::new()
+    let response_body = reqwest::Client::new()
         .post(slack_webhook)
         .json(&serde_json::json!({
             "text": "Reqwest.rs",
         }))
         .send()
         .await?
-        .json()
+        .text()
         .await?;
 
-    println!("debug json {:#?}", echo_json);
+    println!("response body {:#?}", response_body);
     // Object(
     //     {
     //         "body": String(
