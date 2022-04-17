@@ -1,0 +1,20 @@
+name: Scheduled build
+
+on: [push]
+# on:
+#   schedule:
+#     # 月曜日の 11:00 (JST) に処理を実行する。
+#     # UTC の 02:00 は JST だと 11:00 。
+#     - cron: '20 8 * * *'
+
+jobs:
+  run:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      run: cargo run --verbose

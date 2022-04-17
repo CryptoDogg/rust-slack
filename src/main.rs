@@ -6,7 +6,7 @@ async fn main() -> Result<(), reqwest::Error> {
     let response_body = reqwest::Client::new()
         .post(slack_webhook)
         .json(&serde_json::json!({
-            "text": "Reqwest.rs",
+            "text": "Hello, World!",
         }))
         .send()
         .await?
