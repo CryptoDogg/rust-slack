@@ -2,6 +2,8 @@ use dotenv;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error> {
+    let slack_webhook = dotenv::var("TEST_KEY").expect("TEST_KEY must be set");
+    println!("test key {:#?}", slack_webhook);
     let echo_json: serde_json::Value = reqwest::Client::new()
         .post("https://jsonplaceholder.typicode.com/posts")
         .json(&serde_json::json!({
