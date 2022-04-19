@@ -1,11 +1,11 @@
 name: Scheduled build
 
-# on: [push]
-on:
-  schedule:
-    # 月曜日の 11:00 (JST) に処理を実行する。
-    # UTC の 02:00 は JST だと 11:00 。
-    - cron: '20 10 * * *'
+on: [push]
+# on:
+#   schedule:
+#     # 月曜日の 11:00 (JST) に処理を実行する。
+#     # UTC の 02:00 は JST だと 11:00 。
+#     - cron: '20 10 * * *'
 
 jobs:
   run:
@@ -26,4 +26,4 @@ jobs:
           touch .env
           echo "SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}" >> .env
       - name: Run tests
-        run: cargo run --verbose
+        run: cargo test --verbose
